@@ -1,0 +1,96 @@
+.main{
+    padding: 15px;
+    height: 100vh;
+}
+.layout{
+    display: flex;
+}
+
+.sidebar{
+    /* min-height: 90%; */
+    height: 570px;
+    width: 320px;
+    border-radius: 5px;
+    background-color: rgb(162, 188, 162);
+    box-shadow: 0px 0px 2px rgb(32, 63, 53);
+    margin-right: 20px;
+}
+
+.content{
+    width: 100%;
+    height: 100%;
+}
+
+.header{
+    height: 12vh;
+    margin-bottom: 20px;
+    /* width: 40%; */
+    border: 1px solid black;
+    /* box-shadow: 2xp 2px 2px rgb(31, 47, 43); */
+    background-color: white; 
+}
+.body{
+    height: 81vh;
+    text-align: center;
+    margin-bottom: 20px;
+    /* width: 40%; */
+    border: 1px solid black;
+    /* box-shadow: 2xp 2px 2px rgb(31, 47, 43); */
+    background-color: white; 
+
+}
+.logo h6{
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 20px 0px;
+}
+.menu{
+    margin-top: 40px;
+}
+.menu-item{
+    margin-top: 30px;
+}
+.menu-item a{
+    color: blue;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+.menu-item i{
+    font-size: 1.2rem;
+    margin: 0px 12px;
+}
+.active{
+    background-color: white;
+    /* margin: 0pc ; */
+    padding: 10px;
+    /* color: black; */
+    
+
+}
+
+.active a, active i{
+    color: black;
+    margin: 0px 13px;
+}
+.header_content{
+    display: flex;
+    align-items: center;
+    margin: 0px 14px;
+    height: 54px;
+    justify-content: flex-end;
+}
+.header_content i{
+    margin-top: 10px;
+    margin-right: 20px;
+    font-size: 1.5rem;
+}
+.header_content a{
+    text-decoration: none;
+    color: blue;
+    font-size: 1.5rem;
+    margin: 0px 10px;
+    text-transform: uppercase;
+}
+.text-left{
+    text-align: left;
+}

@@ -1,0 +1,11 @@
+.card{
+    margin-bottom: 20px;
+    margin-left: 12px;
+}
+.card-header{
+    text-align: left;
+}
+.card-body{
+    text-align: left;
+
+}

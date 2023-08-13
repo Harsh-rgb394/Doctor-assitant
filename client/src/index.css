@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.spinner{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(112, 108, 108);
+}
+.from-btn{
+    width: 250px !important;
+    margin-top: 30px !important;
+}
