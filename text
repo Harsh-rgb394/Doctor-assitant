@@ -1,0 +1,35 @@
+morgan basically used for loggin the request like made request through server
+request we hvae that code and time takne by request print on console
+for avoding error of cors or parse thne use express.json() /or you can wiht body-parser also
+morgan dev status token or code ke colors bata hai red for error and green success
+
+backend step first 
+bootstrap cdn links in indexthtml
+remove all styles code and app.js code romved 
+npx audit fix 
+concurrently for both side run and npm start --prefix ./client
+set proxy port of bakend in frontend 
+make pages and compnenets folders then make broswer routing routes route app.js
+concurrently ko  backend mein rakha hai when call acios network calls on backend some
+lines ob json file proxy link(backend of) on fontend for backend request for axios
+
+req ke mein header mein token hota hai and body mein fomr the data hota hai then first 
+extract token from header ke ander authoriation usem token lenge then for nishne of jwt token statts wiht bearer then token split " " [1]
+
+
+Authentication Tokens: Authentication tokens are used to verify the identity of 
+a user or system. When a user logs in, they receive an authentication token, 
+often in the form of a JSON Web Token (JWT) or a session token. This token is 
+sent with each subsequent request to the server, allowing the server to validate
+ the user's identity without the need for the user to repeatedly enter their
+  username and password.
+
+Authorization Tokens: Authorization tokens, sometimes referred to as access tokens
+, determine what actions or resources a user or system is allowed to access. 
+These tokens are often obtained after successful authentication and are used to
+ enforce access control policies. They contain information about the user's 
+ permissions and role
+
+ font aweome ke cdn links copy kiye hai on indexthml file 
+ and go to font awsome offical website and search for icons
+ link as anchor tag he hota i mean css ke liye a{} apply karo ases

@@ -8,6 +8,7 @@ export const alertslice=createSlice({
     reducers:{
         showLoading:(state)=>{
             state.loading=true
+            // these are reducers okay wiht defined actions type called wiht or export with alertlice.actions
 
             
         },

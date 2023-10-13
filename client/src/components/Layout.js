@@ -7,6 +7,7 @@ import { Badge, message } from "antd";
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
+  // access and manipulate the current URL location within a web application mtbl like localhost:3000/apply-doctor
   const navigate = useNavigate();
   // if user exist or gets then isadmin or not then adminmenu then usermnu
 
@@ -25,19 +26,19 @@ const Layout = ({ children }) => {
     },
     {
       name: "Appointments",
-      path: "/doctor-appointments",
+      path: "/appointments",
       icon: "fa-solid fa-list",
     },
 
     {
-      name: " Profile",
-    //   path:  "/doctor/profile",
+      name: "Profile",
+      //   path:  "/doctor/profile",
       path: `/doctor/profile/${user?._id}`,
       icon: "fa-solid fa-user",
     },
   ];
 
-//   doctor menu =================================
+  //   doctor menu =================================
 
   const sidebarmenu = user?.isAdmin
     ? adminmenu
@@ -69,6 +70,7 @@ const Layout = ({ children }) => {
               <div className={`menu-item`} onClick={logouthandler}>
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 <Link to="/login">Logout</Link>
+                {/* <p>logout</p> */}
               </div>
             </div>
           </div>

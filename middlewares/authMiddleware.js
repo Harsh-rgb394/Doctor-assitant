@@ -21,6 +21,9 @@ const tokenget=async(req,res,next)=>{
             }
             else{
                 req.body.userId=decoded.id
+                // yeh token mein kaise aaye yeh id token ko genertate kiya 
+                // use wqt hamen set kie the on token as object id user_id and we decode the token get id set as user_id after
+                // verfication of token wiht secret key 
                 next();
                     
             }

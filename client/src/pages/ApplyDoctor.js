@@ -7,9 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoading, showLoading } from "../redux/features/alertSlice";
 import axios from "axios";
-
+// ...values is spread the dsta or values as array or also make a temp or another
+// array wiht own values like values +user_id array 
 const ApplyDoctor = () => {
-  // moment is liabry for parsing ,validating for dates 
+  // moment is liabry for parsing ,validating for dates
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -150,8 +151,13 @@ const ApplyDoctor = () => {
           </Col>
 
           <Col xs={24} md={24} lg={8}>
-            <Form.Item name="timings" label="Timings" required>
-              <TimePicker.RangePicker format="HH:mm" />
+            <Form.Item
+              name="timings"
+              label="Timings"
+              required
+              className="timing"
+            >
+              <TimePicker.RangePicker format="HH:mm" className="boxx" />
             </Form.Item>
           </Col>
 

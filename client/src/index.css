@@ -1,17 +1,19 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* background-color: rgb(170, 201, 201); */
 }
 
-.spinner{
+.spinner {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgb(112, 108, 108);
 }
-.from-btn{
+
+.from-btn {
     width: 250px !important;
-    margin-top: 30px !important;
+    margin-top: 17px !important;
 }
