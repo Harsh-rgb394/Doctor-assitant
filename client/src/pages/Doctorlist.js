@@ -24,8 +24,8 @@ const Doctorlist = ({doctor}) => {
         <p>
             <b> Status - </b>{doctor.status}
         </p>
-
-        {/* <p>
+{/* 
+        <p>
             <b>  Timings</b>{doctor.timings[0]}-{doctor.timings[1]}
         </p> */}
 
