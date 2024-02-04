@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "proxy": "https://doctor-appoint-9ui3.onrender.com",
+  "proxy": "http://localhost:5000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
