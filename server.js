@@ -3,7 +3,8 @@ const colors = require("colors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectdb = require("./config/db");
-const path=require('path');
+const cors=require("cors");
+// const path=require('path');
 
 // intilae and import dotenv file
 dotenv.config();
@@ -18,20 +19,27 @@ const dev_mode = process.env.dev_mode || "development";
 // rest varible
 const app = express();
 
+app.use(cors({
+
+    origin:["https://doctor-assitant-123.vercel.app"],
+    methods:["POST","GET"],
+    credentials:true
+}))
+
 // middlewares
 app.use(express.json());
 app.use(morgan("dev"));
 
 // for hosting 
-app.use(express.static(path.join(__dirname,"./client/build")));
+// app.use(express.static(path.join(__dirname,"./client/build")));
 
-app.get('*',function (_,res){
-  res.sendFile(path.join(__dirname,"./client/build/index.html"),function(err){
-    res.status(500).send(err);
+// app.get('*',function (_,res){
+//   res.sendFile(path.join(__dirname,"./client/build/index.html"),function(err){
+//     res.status(500).send(err);
 
-  })
+//   })
 
-})
+// })
 
 // routes made now
 app.use("/api/v1/user", require("./routes/userRoutes"));
