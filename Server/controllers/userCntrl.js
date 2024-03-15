@@ -1,9 +1,9 @@
 const userModel = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
-const Doctormodel = require("./../models/Doctormodel");
+const Doctormodel = require("../models/Doctormodel");
 const moment = require("moment");
-const appointmentModel = require("./../models/appointmentModel");
+const appointmentModel = require("../models/appointmentModel");
 // for password encrytion ,decruytion ,
 // Authentication verifies the identity of a user or service, and authorization determines their access rights.
 

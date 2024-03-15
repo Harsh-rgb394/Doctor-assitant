@@ -19,14 +19,9 @@ const dev_mode = process.env.dev_mode || "development";
 // rest varible
 const app = express();
 
-app.use(cors({
-
-    origin:["https://doctor-assitant-123.vercel.app"],
-    methods:["POST","GET"],
-    credentials:true
-}))
 
 // middlewares
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
