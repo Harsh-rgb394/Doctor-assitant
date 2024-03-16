@@ -6,6 +6,7 @@ import { Badge, message } from "antd";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
+  console.log(user);
   const location = useLocation();
   // access and manipulate the current URL location within a web application mtbl like localhost:3000/apply-doctor
   const navigate = useNavigate();

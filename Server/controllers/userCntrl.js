@@ -33,7 +33,7 @@ const Logincontroller = async (req, res) => {
     );
     res
       .status(200)
-      .send({ message: "user login successfully", success: true, token });
+      .send({ message: "user login successfully", data:existuse,success: true, token });
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "cannot login" });
@@ -66,9 +66,10 @@ const Registercontroller = async (req, res) => {
 const authController = async (req, res) => {
   try {
     const user = await userModel.findById({ _id: req.body.userId });
+  
     user.password = undefined;
     if (!user) {
-      res.status(200).send({
+      res.status(404).send({
         message: "user already exist",
         success: false,
       });
@@ -110,7 +111,8 @@ const applyDoctorController = async (req, res) => {
         onClickPath: "/admin/doctors",
       },
     });
-    await userModel.findByIdAndUpdate(adminuser._id, { notificaton });
+    // await userModel.findByIdAndUpdate(adminuser._id, { notificaton });
+    await adminuser.save();
     // update karna tha to id udpate hoga so update with id 
     // mere hissab se admin users honge bahut but mein jisee admin ke notificatiion update karna chata hu uske id mene then update kiya 8
     res.status(201).send({
@@ -130,17 +132,25 @@ const applyDoctorController = async (req, res) => {
 const getallnotify = async (req, res) => {
   try {
     const user = await userModel.findById({ _id: req.body.userId });
-    // user.password=undefined;
-    const seennotification = user.seennotification;
+    user.password=undefined;
     const notificaton = user.notificaton;
-    seennotification.push(...notificaton);
-    user.notificaton = [];
-    user.seennotification = notificaton;
-    const udpateduser = await user.save();
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+        user._id,
+        {
+            $push: { seennotification: { $each: notificaton } },
+            $set: { notificaton: [] }
+        },
+        { new: true } // Returns the updated document
+    );
+    // seennotification.push(...notificaton);
+    // user.notificaton = [];
+    // user.seennotification = notificaton;
+    // const udpateduser = await user.save();
     res.status(200).send({
       success: true,
       messsage: "get notifcation successfully",
-      data: udpateduser,
+      data: updatedUser,
     });
   } catch (error) {
     console.log(error);
@@ -154,14 +164,22 @@ const getallnotify = async (req, res) => {
 const deleteallnotify = async (req, res) => {
   try {
     const user = await userModel.findOne({ _id: req.body.userId });
-    user.notificaton = [];
-    user.seennotification = [];
-    const udpatedusers = await user.save();
-    udpatedusers.password = undefined;
+    // user.notificaton = [];
+    // user.seennotification = [];
+    
+    const udpateduser=await userModel.findByIdAndUpdate(user._id,{
+      $set:{notificaton:[],seennotification:{}}
+    },
+    {
+      new:true
+    }
+    )
+    udpateduser.password = undefined;
+    // const udpatedusers = await user.save();
     res.status(200).send({
       success: true,
       message: "notifcation deleted successfully",
-      data: udpatedusers,
+      data: udpateduser,
     });
   } catch (error) {
     console.log(error);

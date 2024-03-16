@@ -9,7 +9,18 @@ const jwt=require("jsonwebtoken");
 const tokenget=async(req,res,next)=>{
     try {
         const token=req.headers["authorization"].split(" ")[1];
+        // const token=req.headers.authorization
+        //  for postman we only provide token
         // console.log(token);
+        // let tokenvalue;
+
+        // if(token){
+            // tokenvalue=token.split(" ")[1];
+        // }
+        // else{
+        //     res.status(404).json({message:"token not getted"});
+        // }
+       
 
         jwt.verify(token,process.env.JWT_SECRET,(error,decoded)=>{
             if(error){
@@ -30,7 +41,7 @@ const tokenget=async(req,res,next)=>{
         })
         
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({
             success:false,
             message:"auth failed"

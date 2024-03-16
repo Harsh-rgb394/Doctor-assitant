@@ -8,21 +8,18 @@ import Doctorlist from "./Doctorlist";
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
-
+  console.log(doctors);
   const userdata = async () => {
     // cleint se token genertate kar diya and ha/getlistdoctorsi usse backend or server saide bheja ahia
     try {
-      const res = await axios.get(
-        "/api/v1/user/getlistdoctors",
-        
-        // req.body mein empty pass kiya ahi 
-        // and req headers mein authoriaaation and uske ander bearer theen token pass kar rha hai 
-
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+      const res = await axios.post(
+          "http://localhost:5000/api/v1/user/userdata",
+          {}, // Request body (if any) can be passed as the second argument
+          {
+              headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token"), // Add a space after "Bearer"
+              },
+          }
       );
 
       if (res.data.success) {
@@ -44,9 +41,9 @@ const HomePage = () => {
     // home page ko layour se wrap kar doya hai
     <Layout>
       <h1>this is homepage</h1> 
-       <Row>
+       {/* <Row>
         {doctors && doctors.map((doctor) => <Doctorlist doctor={doctor} />)}
-      </Row>
+      </Row> */}
       {/* <div className="homeImage">
         <img
           className="imgag"

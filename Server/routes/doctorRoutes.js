@@ -1,6 +1,6 @@
 const express=require("express");
 const authMiddleware =require("../middlewares/authMiddleware");
-const {getdoctorinfocontroller,showupdatecontroller,bookingavailablecontroller,getdoctorappointapproval,handleapppointmentstatus}=require("./../controllers/Doctorctrl")
+const {getdoctorinfocontroller,showupdatecontroller,bookingavailablecontroller,getdoctorappointapproval,handleapppointmentstatus}=require("../controllers/Doctorctrl")
 
 
 const router=express.Router();

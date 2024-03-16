@@ -15,7 +15,7 @@ export default function ProtectedRoutes({ children }) {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "/api/v1/user/userdata",
+        "http://localhost:5000/api/v1/user/userdata",
         { token: localStorage.getItem("token") },
         {
           headers: {
@@ -44,6 +44,8 @@ export default function ProtectedRoutes({ children }) {
       getuser();
     }
   }, [user, getuser]);
+
+
   if (localStorage.getItem("token")) {
     return children;
   }
