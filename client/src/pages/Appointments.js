@@ -15,7 +15,7 @@ const Appointments = () => {
     const getallappointment=async()=>{
         try {
             // dispatch(showLoading());
-            const res=await axios.post("http://localhost:5000/api/v1/user/get-all-book-appointment",{userId:user._id},
+            const res=await axios.post("https://doctor-assitant-backend.onrender.com/api/v1/user/get-all-book-appointment",{userId:user._id},
                 {
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem("token")}`

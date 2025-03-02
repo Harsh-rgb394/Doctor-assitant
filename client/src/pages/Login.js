@@ -15,7 +15,7 @@ const Login = () => {
     // console.log(values);
     try {
       dispatch(showLoading());
-      const res = await axios.post("http://localhost:5000/api/v1/user/login", values);
+      const res = await axios.post("https://doctor-assitant-backend.onrender.com/api/v1/user/login", values);
       window.location.reload();
       // isse bar bar admin and user ke page ko  bar bar reload nahi karna padega
       dispatch(hideLoading());

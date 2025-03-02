@@ -16,7 +16,7 @@ const DoctorAppointment = () => {
     const getallappointment=async()=>{
         try {
             // dispatch(showLoading());
-            const res=await axios.post("http://localhost:5000/api/v1/doctor/getdoctorapproval",{
+            const res=await axios.post("https://doctor-assitant-backend.onrender.com/api/v1/doctor/getdoctorapproval",{
                 userId:user._id
             },{
 
@@ -60,7 +60,7 @@ const handlestatus=async(record,status)=>{
     try {
         // dispatch(showLoading());
         const resposne = await axios.post(
-          "http://localhost:5000/api/v1/doctor/appointmentstatus",
+          "https://doctor-assitant-backend.onrender.com/api/v1/doctor/appointmentstatus",
           { appointmentId : record._id, status: status },
           {
             headers: {

@@ -8,7 +8,7 @@ const Doctors = () => {
 
   const handledoctorRequest=async(record,status)=>{
     try {
-      const res=await axios.post("http://localhost:5000/api/v1/admin/getapprovaldoctor",{doctorId: record._id,userId:record.userId,status:status},
+      const res=await axios.post("https://doctor-assitant-backend.onrender.com/api/v1/admin/getapprovaldoctor",{doctorId: record._id,userId:record.userId,status:status},
       {
         headers:{
           Authorization:`Bearer ${localStorage.getItem("token")}`
@@ -29,7 +29,7 @@ const Doctors = () => {
 
   const getDoctors = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/v1/admin/getAllDoctors", {
+      const res = await axios.get("https://doctor-assitant-backend.onrender.com/api/v1/admin/getAllDoctors", {
         headers: {
           Authorization: "Bearer "+localStorage.getItem("token"),
         },

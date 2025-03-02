@@ -20,7 +20,7 @@ const NotifcationPage = () => {
     try {
       dispatch(showLoading);
       const res = await axios.post(
-        "http://localhost:5000/api/v1/user/get-all-notification",
+        "https://doctor-assitant-backend.onrender.com/api/v1/user/get-all-notification",
         { userId: user._id },
         {
           headers: {
@@ -51,7 +51,7 @@ const NotifcationPage = () => {
     try {
       dispatch(showLoading);
       const res = await axios.post(
-        "http://localhost:5000/api/v1/user/delete-all-notification",
+        "https://doctor-assitant-backend.onrender.com/api/v1/user/delete-all-notification",
         { userId: user._id },
         {
           headers: {

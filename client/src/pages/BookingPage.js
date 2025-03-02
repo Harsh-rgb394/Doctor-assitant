@@ -37,7 +37,7 @@ const BookingPage = () => {
     const userdata=async()=>{
       // cleint se token genertate kar diya and ha/getlistdoctorsi usse backend or server saide bheja ahia 
       try {
-        const res=await axios.post("http://localhost:5000/api/v1/doctor/getdoctorinfo",{
+        const res=await axios.post("https://doctor-assitant-backend.onrender.com/api/v1/doctor/getdoctorinfo",{
             doctorId:params.doctorId
         },{
           headers:{
@@ -60,7 +60,7 @@ const BookingPage = () => {
   const checkavalable=async()=>{
     try {
       dispatch(showLoading());
-      const res=await axios.post("http://localhost:5000/api/v1/user/appointment-available",{
+      const res=await axios.post("https://doctor-assitant-backend.onrender.com/api/v1/user/appointment-available",{
         doctorId:params.doctorId,
         date:date,
         time:time
@@ -100,7 +100,7 @@ const BookingPage = () => {
        
         dispatch(showLoading());
         const response = await axios.post(
-          "http://localhost:5000/api/v1/user/book-appointment",
+          "https://doctor-assitant-backend.onrender.com/api/v1/user/book-appointment",
           {
             doctorId: params.doctorId,
             userId: user._id,

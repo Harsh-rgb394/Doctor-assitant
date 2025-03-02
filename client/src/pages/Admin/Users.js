@@ -11,7 +11,7 @@ const [users,setUsers]=useState([]);
 
 const getUsers=async()=>{
     try {
-        const res=await axios.get("http://localhost:5000/api/v1/admin/getAllUsers",
+        const res=await axios.get("https://doctor-assitant-backend.onrender.com/api/v1/admin/getAllUsers",
         {
 
             headers:{

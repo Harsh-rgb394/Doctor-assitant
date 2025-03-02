@@ -13,7 +13,7 @@ const HomePage = () => {
     // cleint se token genertate kar diya and ha/getlistdoctorsi usse backend or server saide bheja ahia
     try {
       const res = await axios.get(
-          "http://localhost:5000/api/v1/user/getlistdoctors",
+          "https://doctor-assitant-backend.onrender.com/api/v1/user/getlistdoctors",
           // Request body (if any) can be passed as the second argument
           {
               headers: {

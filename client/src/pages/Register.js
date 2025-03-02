@@ -19,7 +19,7 @@ const Register = () => {
     // console.log(values);
     try {
       dispatch(showLoading());
-      const res = await axios.post("http://localhost:5000/api/v1/user/register", values);
+      const res = await axios.post("https://doctor-assitant-backend.onrender.com/api/v1/user/register", values);
       dispatch(hideLoading());
       // ifvalues scueedfuly gaye hai ya nahii so
       if (res.data.success) {

@@ -27,7 +27,7 @@ const Profile = () => {
     try {
       dispatch(showLoading);
       const res = await axios.post(
-        "http://localhost:5000/api/v1/doctor/showupdateproifle", updatedata,
+        "https://doctor-assitant-backend.onrender.com/api/v1/doctor/showupdateproifle", updatedata,
       
         {
           headers: {
@@ -53,7 +53,7 @@ const Profile = () => {
 
     const getDoctorinfo=async()=>{
         try {
-            const res=await axios.post("http://localhost:5000/api/v1/doctor/bookingavailable",{userId:user._id},{
+            const res=await axios.post("https://doctor-assitant-backend.onrender.com/api/v1/doctor/bookingavailable",{userId:user._id},{
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem("token")}`
 
