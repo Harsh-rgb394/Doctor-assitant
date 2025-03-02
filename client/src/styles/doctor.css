@@ -1,4 +1,4 @@
-.card{
+/* .card{
     margin-bottom: 20px;
     margin-left: 12px;
 }
@@ -8,4 +8,64 @@
 .card-body{
     text-align: left;
 
+} */
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-bottom: 20px;
+    margin-left: 12px;
+    padding: 15px;
+    width: 100%;
+    max-width: 400px;
+    /* Adjust the max-width */
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px 8px 0 0;
+    text-align: left;
+}
+
+.card-body {
+    padding: 12px;
+    text-align: left;
+}
+
+.card-body p {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.card-body b {
+    color: #222;
+}
+
+/* 🌐 Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    .card-header {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .card-body {
+        text-align: center;
+    }
 }

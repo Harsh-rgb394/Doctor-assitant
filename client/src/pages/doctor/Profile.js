@@ -2,35 +2,33 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import { Col, Form, Input, Row, TimePicker, message } from 'antd';
 import axios from 'axios';
-import {useParams} from "react-router-dom"
+// import {useParams} fr/om "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoading, showLoading } from "../../redux/features/alertSlice";
 import moment from "moment"
-
+import "../../styles/Profile.css"
+import DoctorProfile from '../../components/DoctorProfile';
 
 
 const Profile = () => {
     const {user}=useSelector(state=>state.user);
     const [doctor,setDoctor]=useState(null);
-    const paramas=useParams();
+    const [isediting,setediting]=useState({});
+    const [updatedata,setupdatedata]=useState(null);
+    // const paramas=useParams();
+    console.log(updatedata);
 
     // oncilk button for sending request for udpte or get prfile 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handlefinish = async (values) => {
+  const onEditProfile = async (values) => {
     // console.log(values);
     try {
       dispatch(showLoading);
       const res = await axios.post(
-        "/api/v1/doctor/showupdateproifle",
-        { ...values, userId: user._id ,
-        timings:[
-            moment(values.timings[0]).format("HH:mm"),
-            moment(values.timings[1]).format("HH:mm")
-
-          ]
-        },
+        "http://localhost:5000/api/v1/doctor/showupdateproifle", updatedata,
+      
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -39,8 +37,10 @@ const Profile = () => {
       );
       dispatch(hideLoading);
       if (res.data.success) {
+        setDoctor(res.data.data);
+        setediting({});
         message.success(res.data.message);
-        navigate("/");
+        // navigate("/");
       } else {
         message.error(res.data.success);
       }
@@ -53,7 +53,7 @@ const Profile = () => {
 
     const getDoctorinfo=async()=>{
         try {
-            const res=await axios.post("/api/v1/doctor/getdoctorinfo",{userId:paramas.id},{
+            const res=await axios.post("http://localhost:5000/api/v1/doctor/bookingavailable",{userId:user._id},{
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem("token")}`
 
@@ -62,6 +62,7 @@ const Profile = () => {
 
         if(res.data.success){
             setDoctor(res.data.data);
+            setupdatedata(res.data.data);
         }
             
         } catch (error) {
@@ -73,136 +74,110 @@ const Profile = () => {
 
 useEffect(()=>{
     getDoctorinfo()
+    //  eslint-disable-next-line
 },[])
+
+const handleEditClick = (field) => {
+  setediting({ ...isediting, [field]: true });
+};
+
+// Handle input change
+const handleInputChange = (field, value) => {
+  setupdatedata({ ...updatedata, [field]: value });
+};
+
+
+const renderField = (field, label) => (
+  <div className="profile-row">
+      <span className="label">{label}:</span>
+      {isediting[field] ? (
+          <input
+              type="text"
+              value={updatedata[field] || ''}
+              onChange={(e) => handleInputChange(field, e.target.value)}
+              onBlur={() => setediting({ ...isediting, [field]: false })}
+              autoFocus
+          />
+      ) : (
+          <span className="value" onClick={() => handleEditClick(field)}>
+              {updatedata[field] || 'N/A'}
+          </span>
+      )}
+  </div>
+);
+
   return (
     <Layout>
-        <h3>Profile</h3>
         {doctor &&(
             // dtat hatota hai apne pass request or conrirller se use lenea 
-            <Form layout="vertical" onFinish={handlefinish} className="m-3" initialValues={{
-                ...doctor,
-                timings:[
-                    moment(doctor.timings[0],"HH:mm"),
-                    moment(doctor.timings[1],"HH:mm")
-                ]
-            }}>
-            <h5 className="text-left">Personal Details :</h5>
-    
-            <Row gutter={20}>
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item
-                  name="firstname"
-                  label="Firstname"
-                  required
-                  rules={[{ required: true }]}
-                >
-                  <Input type="text" placeholder="enter your name" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item
-                  name="lastname"
-                  label="Lastname"
-                  required
-                  rules={[{ required: true }]}
-                >
-                  <Input type="text" placeholder="enter your lastname" />
-                </Form.Item>
-              </Col>
-    
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item
-                  name="phone"
-                  label="Phone"
-                  required
-                  rules={[{ required: true }]}
-                >
-                  <Input type="text" placeholder="enter your phone" />
-                </Form.Item>
-              </Col>
-    
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item
-                  name="email"
-                  label=" Email"
-                  required
-                  rules={[{ required: true }]}
-                >
-                  <Input type="text" placeholder="enter your email" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item
-                  name=" website"
-                  label="website"
-                  required
-                  rules={[{ required: true }]}
-                >
-                  <Input type="text" placeholder="enter your wesite name" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item
-                  name="address"
-                  label=" Address"
-                  required
-                  rules={[{ required: true }]}
-                >
-                  <Input type="text" placeholder="enter your address" />
-                </Form.Item>
-              </Col>
-            </Row>
-    
-            <h5 className="text-left">Professional Details :</h5>
-    
-            <Row gutter={20}>
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item
-                  name="specialization"
-                  label="Specialization"
-                  required
-                  rules={[{ required: true }]}
-                >
-                  <Input type="text" placeholder="enter your specialization" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item
-                  name="experience"
-                  label="Experience"
-                  required
-                  rules={[{ required: true }]}
-                >
-                  <Input type="text" placeholder="enter your experience" />
-                </Form.Item>
-              </Col>
-    
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item
-                  name="feesperconsulation"
-                  label="Feesperconsulation"
-                  required
-                  rules={[{ required: true }]}
-                >
-                  <Input
-                    type="text"
-                    placeholder="enter your phone feesperconsulation"
-                  />
-                </Form.Item>
-              </Col>
-    
-              <Col xs={24} md={24} lg={8}>
-                <Form.Item name="timings" label="Timings" required>
-                  <TimePicker.RangePicker format="HH:mm" />
-                </Form.Item>
-              </Col>
-    
-              <Col xs={24} md={24} lg={8}></Col>
-              <Col xs={24} md={24} lg={8}>
-                <button className="btn btn-primary from-btn">Update</button>
-              </Col>
-            </Row>
-          </Form>
+            // <DoctorForm handlefinish={handlefinish} />
+            // <DoctorProfile doctor={doctor} onEditProfile={onEditProfile}/>
+            <div className="profile-container">
+            <div className="profile-card">
+                {/* <div className="profile-header">
+                    <h2>Doctor Profile</h2>
+                </div> */}
+
+                {/* Personal Information */}
+                <div className="profile-section">
+                    <h3>Personal Information</h3>
+                    {renderField('firstname', 'First Name')}
+                    {renderField('lastname', 'Last Name')}
+                    {renderField('specialization', 'Specialization')}
+                    {renderField('experience', 'Experience (years)')}
+                    {renderField('feesperconsulation', 'Fees Per Consultation')}
+                    <div className="profile-row">
+                        <span className="label">Status:</span>
+                        <span className={`status-badge ${doctor.status}`}>{doctor.status}</span>
+                    </div>
+                </div>
+
+                {/* Contact Information */}
+                <div className="profile-section">
+                    <h3>Contact Information</h3>
+                    {renderField('phone', 'Phone')}
+                    {renderField('email', 'Email')}
+                    {renderField('website', 'Website')}
+                    {renderField('address', 'Address')}
+                </div>
+
+                {/* Timings Section */}
+                <div className="profile-section">
+                    <h3>Timings</h3>
+                    <div className="timings-grid">
+                        {doctor.timings?.map((time, index) => (
+                            <div
+                                key={index}
+                                className="timing-slot"
+                                onClick={() => handleEditClick(`timings[${index}]`)}
+                            >
+                                {isediting[`timings[${index}]`] ? (
+                                    <input
+                                        type="text"
+                                        value={updatedata.timings[index] || ''}
+                                        onChange={(e) => {
+                                            const newTimings = [...updatedata.timings];
+                                            newTimings[index] = e.target.value;
+                                            setupdatedata({ ...updatedata, timings: newTimings });
+                                        }}
+                                        onBlur={() => setediting({ ...isediting, [`timings[${index}]`]: false })}
+                                        autoFocus
+                                    />
+                                ) : (
+                                    time
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Save Button */}
+                <div className="save-btn-container">
+                    <button className="save-button" onClick={onEditProfile}>Save Changes</button>
+                </div>
+            </div>
+        </div>
+            
 
         )} 
         </Layout>

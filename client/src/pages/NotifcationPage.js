@@ -5,9 +5,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../styles/notification.css";
+import { updatenotifications } from "../redux/features/UserSlice";
 
 const NotifcationPage = () => {
   const { user } = useSelector((state) => state.user);
+  // console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // isse user ke ander notiticaton usse get karke dredux se
@@ -28,6 +31,10 @@ const NotifcationPage = () => {
       dispatch(hideLoading);
       if (res.data.success) {
         message.success(res.data.message);
+        dispatch(updatenotifications({
+          notificaton: [],
+          seennotification: [...user.notificaton, ...user.seennotification] 
+        }))
       } else {
         message.error(res.data.message);
       }
@@ -56,6 +63,10 @@ const NotifcationPage = () => {
       dispatch(hideLoading);
       if (res.data.success) {
         message.success(res.data.message);
+        dispatch(updatenotifications({
+          notificaton: [],
+          seennotification: [] 
+        }))
       } else {
         message.error(res.data.message);
       }
@@ -67,52 +78,47 @@ const NotifcationPage = () => {
   };
   return (
     <Layout>
-      <h4 className="p-3">NotifcationPage</h4>
-      <Tabs>
-        <Tabs.TabPane tab="UnRead" key={0}>
-          <div className="d-flex justify-content-end">
-            <h4
-              className="p-2"
-              onClick={handlemarkread}
-              style={{ cursor: "pointer" }}
-            >
-              Mark all read
-            </h4>
-          </div>
-          {user?.notificaton.map((notificationMsgs) => (
-            <div className="card" style={{ cursor: "pointer" }}>
-              <div
-                className="card-text"
-                onClick={() => navigate(notificationMsgs.onClickPath)}
-              >
-                <div className="card-text">{notificationMsgs.message}</div>
-              </div>
-            </div>
-          ))}
-        </Tabs.TabPane>
+      <div className="notifications-container">
 
-        <Tabs.TabPane tab="Read" key={1}>
-          <div className="d-flex justify-content-end">
-            <h4
-              className="p-2"
-              onClick={handledeleteread}
-              style={{ cursor: "pointer" }}
-            >
-              Delete all read
-            </h4>
+  <Tabs className="notifications-tabs">
+    {/* Unread Notifications Tab */}
+    <Tabs.TabPane tab="Unread" key={0}>
+      <div className="tab-header">
+        <h4 className="mark-read-btn" onClick={handlemarkread}>
+          Mark all as Read
+        </h4>
+      </div>
+      {user?.notificaton.length > 0 ? (
+        user?.notificaton.map((notificationMsgs, index) => (
+          <div key={index} className="notification-card" onClick={() => navigate(notificationMsgs.onClickPath)}>
+            <p className="notification-text">{notificationMsgs.message}</p>
           </div>
+        ))
+      ) : (
+        <p className="empty-message">No unread notifications</p>
+      )}
+    </Tabs.TabPane>
 
-          {user?.seennotification.map((notificationMsgs) => (
-            <div
-              className="card"
-              onClick={navigate(notificationMsgs.onClickPath)}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="card-text">{notificationMsgs.message}</div>
-            </div>
-          ))}
-        </Tabs.TabPane>
-      </Tabs>
+    {/* Read Notifications Tab */}
+    <Tabs.TabPane tab="Read" key={1}>
+      <div className="tab-header">
+        <h4 className="delete-read-btn" onClick={handledeleteread}>
+          Delete all Read
+        </h4>
+      </div>
+      {user?.seennotification.length > 0 ? (
+        user?.seennotification.map((notificationMsgs, index) => (
+          <div key={index} className="notification-card read" onClick={() => navigate(notificationMsgs.onClickPath)}>
+            <p className="notification-text">{notificationMsgs.message}</p>
+          </div>
+        ))
+      ) : (
+        <p className="empty-message">No read notifications</p>
+      )}
+    </Tabs.TabPane>
+  </Tabs>
+</div>
+
     </Layout>
   );
 };

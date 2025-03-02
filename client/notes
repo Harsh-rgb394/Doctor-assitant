@@ -1,0 +1,203 @@
+.formcontainer {
+width: 90%;
+max-width: 1200px;
+/* Increase max-width for better layout on large screens */
+padding: 20px;
+border-radius: 10px;
+}
+
+/* Layout for larger screens (Desktop) */
+.formRow {
+display: flex;
+flex-direction: row;
+gap: 20px;
+justify-content: space-between;
+width: 100%;
+}
+
+/* Each section styling */
+.formSection {
+flex: 1;
+/* Equal width distribution */
+min-width: 48%;
+/* Ensures equal width and prevents shrinking too much */
+padding: 20px;
+border: 1px solid #ddd;
+border-radius: 8px;
+background: #f9f9f9;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.cardTitle {
+font-size: 20px;
+margin-bottom: 15px;
+font-weight: bold;
+text-align: center;
+}
+
+/* Center the Submit Button */
+.buttonContainer {
+text-align: center;
+margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+.formcontainer {
+width: 95%;
+}
+
+.formRow {
+gap: 10px;
+/* Reduce gap on medium screens */
+}
+
+.formSection {
+min-width: 48%;
+}
+}
+
+@media (max-width: 768px) {
+.formRow {
+flex-direction: column;
+gap: 20px;
+}
+
+.formSection {
+width: 100%;
+min-width: auto;
+}
+}
+
+
+
+
+<div className="">
+    <div className={ styles.formcontainer }>
+        <Form layout="vertical" onFinish={ handlefinish } initialValues={ { ...initialValues, ...(initialValues && {
+            timings: [ moment(initialValues?.timings[0], "HH:mm" ), moment(initialValues?.timings[1], "HH:mm" ), ], }),
+            } }>
+            <div className={ styles.formRow }> {
+                /* Left Side - Personal Information */
+                }
+
+                <div className={ styles.formSection }>
+                    <h1 className={ styles.cardTitle }>Personal Information</h1>
+                    <Form.Item label="First Name" name="firstname" rules={ [ { required: true } ] }><Input
+                            placeholder="First Name" /></Form.Item>
+                    <Form.Item label="Last Name" name="lastname" rules={ [ { required: true } ] }><Input
+                            placeholder="Last Name" /></Form.Item>
+                    <Form.Item label="Phone Number" name="phone" rules={ [ { required: true } ] }><Input
+                            placeholder="Phone Number" /></Form.Item>
+                    <Form.Item label="Website" name="website" rules={ [ { required: true } ] }><Input
+                            placeholder="Website" /></Form.Item>
+                    <Form.Item label="Address" name="address" rules={ [ { required: true } ] }><Input
+                            placeholder="Address" /></Form.Item>
+                </div> {
+                /* Right Side - Professional Information */
+                }
+
+                <div className={ styles.formSection }>
+                    <h1 className={ styles.cardTitle }>Professional Information</h1>
+                    <Form.Item label="Specialization" name="specialization" rules={ [ { required: true } ] }><Input
+                            placeholder="Specialization" /></Form.Item>
+                    <Form.Item label="Email" name="email" rules={ [ { required: true } ] }><Input placeholder="Email" />
+                    </Form.Item>
+                    <Form.Item label="Experience" name="experience" rules={ [ { required: true } ] }><Input
+                            placeholder="Experience" type="number" /></Form.Item>
+                    <Form.Item label="Fee Per Consultation" name="feesperconsulation" rules={ [ { required: true } ] }>
+                        <Input placeholder="Fee Per Consultation" type="number" /></Form.Item>
+                    <Form.Item label="Timings" name="timings" rules={ [ { required: true } ] }>
+                        <TimePicker.RangePicker format="HH:mm" />
+                    </Form.Item>
+                </div>
+            </div> {
+            /* Submit Button - Centered Below */
+            }
+
+            <div className={ styles.buttonContainer }><Button type="primary" htmlType="submit" className={
+                    styles.btnclass }>Submit </Button></div>
+        </Form>
+    </div>
+</div>
+
+
+
+
+<h4 className="p-3">Notifcations</h4>
+<Tabs>
+    <Tabs.TabPane tab="UnRead" key={0}>
+        <div className="d-flex justify-content-end">
+            <h4 className="p-2" onClick={handlemarkread} style={{ cursor: "pointer" }}>
+                Mark all read
+            </h4>
+        </div>
+        {user?.notificaton.map((notificationMsgs) => (
+        <div className="card" style={{ cursor: "pointer" }}>
+            <div className="card-text" onClick={()=> navigate(notificationMsgs.onClickPath)}
+                >
+                <div className="card-text">{notificationMsgs.message}</div>
+            </div>
+        </div>
+        ))}
+    </Tabs.TabPane>
+
+    <Tabs.TabPane tab="Read" key={1}>
+        <div className="d-flex justify-content-end">
+            <h4 className="p-2" onClick={handledeleteread} style={{ cursor: "pointer" }}>
+                Delete all read
+            </h4>
+        </div>
+
+        {user?.seennotification.map((notificationMsgs) => (
+        <div className="card" onClick={navigate(notificationMsgs.onClickPath)} style={{ cursor: "pointer" }}>
+            <div className="card-text">{notificationMsgs.message}</div>
+        </div>
+        ))}
+    </Tabs.TabPane>
+</Tabs>
+
+
+
+
+  <div className='container'>
+        {
+            doctors &&(
+               <div>
+                   <h4 className='lefto'>Dr.{doctors.firstname} {doctors.lastname}</h4>
+                   <h4 className='lefto'>fees: {doctors.feesperconsulation}</h4>
+                   <h4 className='lefto'>timings:{doctors.timings[0]} - {doctors.timings[1]}</h4>
+                   <div className='d-flex flex-column w-50'>
+                    <DatePicker format="DD-MM-YYYY"className="m-2" onChange={(value)=>{setDate(moment(value).format("DD-MM-YYYY"));
+                    setAvailable(false)}}/>
+                    <TimePicker format="HH:mm" className="m-2"onChange={(value)=>{
+                       setAvailable(false)
+                       setTime(moment(value).format("HH:mm"));
+                      }
+                    
+                    
+                    }/>
+
+                    {!available && (<button className='btn btn-primary mt-2' onClick={checkavalable} >
+                        Check Availablity
+                    </button>)}
+                    {!available && (<button className='btn btn-dark mt-2' onClick={handlebooking}>
+                        Book Now
+                    </button>)}
+
+                   </div>
+
+
+
+              
+               </div>
+               
+             
+
+               
+            
+            )
+        }
+            
+          </div>

@@ -8,8 +8,15 @@ export const UserSlice=createSlice({
     reducers:{
         setUser:(state,action)=>{
             state.user=action.payload;
+        },
+        updatenotifications:(state, action)=> {
+            state.user = {
+                ...state.user,
+                notificaton: action.payload.notificaton,
+                seennotification: action.payload.seennotification
+            };
         }
-    }
+    },
 })
 
-export const {setUser}=UserSlice.actions
+export const {setUser,updatenotifications}=UserSlice.actions

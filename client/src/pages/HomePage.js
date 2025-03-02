@@ -12,9 +12,9 @@ const HomePage = () => {
   const userdata = async () => {
     // cleint se token genertate kar diya and ha/getlistdoctorsi usse backend or server saide bheja ahia
     try {
-      const res = await axios.post(
-          "http://localhost:5000/api/v1/user/userdata",
-          {}, // Request body (if any) can be passed as the second argument
+      const res = await axios.get(
+          "http://localhost:5000/api/v1/user/getlistdoctors",
+          // Request body (if any) can be passed as the second argument
           {
               headers: {
                   Authorization: "Bearer " + localStorage.getItem("token"), // Add a space after "Bearer"
@@ -40,17 +40,10 @@ const HomePage = () => {
   return (
     // home page ko layour se wrap kar doya hai
     <Layout>
-      <h1>this is homepage</h1> 
-       {/* <Row>
+       <Row>
         {doctors && doctors.map((doctor) => <Doctorlist doctor={doctor} />)}
-      </Row> */}
-      {/* <div className="homeImage">
-        <img
-          className="imgag"
-          src="https://png.pngtree.com/thumb_back/fh260/back_our/20190620/ourmid/pngtree-health-care-appointment-registration-image_172582.jpg"
-          alt="docimage "
-        />
-      </div> */}
+      </Row>
+      
     </Layout>
   );
 };

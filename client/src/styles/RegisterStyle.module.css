@@ -1,0 +1,93 @@
+/* Center the form container */
+.formcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #74b9ff, #31668f);
+    /* Gradient background */
+}
+
+
+/* Stylish Register Form */
+.registerform {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    /* Responsive form */
+    background: white;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+/* Heading Styles */
+.heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2d3436;
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+.content {
+    width: 100%;
+    border: 1px solid #b2bec3;
+    border-radius: 6px;
+    height: 40px;
+    padding: 8px;
+    font-size: 16px;
+    transition: 0.3s ease;
+    /* margin-left: 12px; */
+}
+
+/* Input Focus Effect */
+.content:focus {
+    border-color: #0984e3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(9, 132, 227, 0.6);
+}
+
+/* Direct Buttons / Links */
+.direct {
+    margin-right: 20px;
+    font-weight: bold;
+    color: #0984e3;
+    text-decoration: none;
+    transition: 0.3s ease;
+    margin-top: 12px;
+}
+
+.direct:hover {
+    text-decoration: underline;
+    color: #0652dd;
+}
+
+/* Submit Button */
+.btn {
+    width: 100%;
+    background: #0984e3;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 12px;
+}
+
+.btn:hover {
+    background: #0652dd;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .registerform {
+        width: 90%;
+        padding: 30px;
+    }
+}

@@ -1,0 +1,90 @@
+.formcontainer {
+    width: 90%;
+    max-width: 1200px;
+    /* Increase max-width for better layout on large screens */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Layout for larger screens (Desktop) */
+.formRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Each section styling */
+.formSection {
+    flex: 1;
+    /* Equal width distribution */
+    min-width: 63%;
+    /* Ensures equal width and prevents shrinking too much */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.cardTitle {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Center the Submit Button */
+.buttonContainer {
+    /* text-align: center; */
+    margin-left: 28%;
+    margin-top: 40px;
+    /* width: 50%; */
+    /* height: 50%; */
+
+}
+
+.btnclass {
+    width: 20%;
+    height: 40%;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .formcontainer {
+        width: 95%;
+    }
+
+    .formRow {
+        gap: 25px;
+        /* Reduce gap on medium screens */
+    }
+
+    .formSection {
+        min-width: 48%;
+    }
+
+    .buttonContainer {
+        margin-left: 2%;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .formRow {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .formSection {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .btnclass {
+        width: 30%;
+        height: 40%;
+    }
+}

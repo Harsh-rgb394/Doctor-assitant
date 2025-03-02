@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, message } from "antd";
-import "../styles/RegisterStyle.css";
+import styles from "../styles/RegisterStyle.module.css";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -38,25 +38,25 @@ const Login = () => {
   };
   return (
     <>
-      <div className="form-container">
+      <div className={styles.formcontainer}>
         <Form
           layout="vertical"
           onFinish={onfinishHandler}
-          className="register_form"
+          className={styles.registerform}
         >
-          <h3 className="heading">Login Please </h3>
+          <h3 className={styles.heading}>Login Please </h3>
 
-          <Form.Item label="Email" name="email" className="items">
-            <input type="email" required className="content" />
+          <Form.Item label="Email" name="email" >
+            <input type="email" required className={styles.content} />
           </Form.Item>
-          <Form.Item label="Password" name="password" className="items">
-            <input type="password" required className="content" />
+          <Form.Item label="Password" name="password" >
+            <input type="password" required className={styles.content} />
           </Form.Item>
-          <Link to="/register" className="direct">
+          <Link to="/register" className={styles.direct}>
             Not register{" "}
           </Link>
 
-          <button className="btn btn-primary" type="submit">
+          <button className={styles.btn} type="submit">
             {" "}
             Login it
           </button>

@@ -1,8 +1,13 @@
 import React from "react";
 import { UserMenu, adminmenu } from "../Data/Data";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { GiPlagueDoctorProfile } from "react-icons/gi";
+import { FaRegUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Badge, message } from "antd";
+// import "../styles/Layout.css";
+import  "../styles/Layout.css";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
@@ -27,14 +32,14 @@ const Layout = ({ children }) => {
     },
     {
       name: "Appointments",
-      path: "/appointments",
+      path: "/doctor-appointments",
       icon: "fa-solid fa-list",
     },
 
     {
       name: "Profile",
       //   path:  "/doctor/profile",
-      path: `/doctor/profile/${user?._id}`,
+      path: `/doctor/profile`,
       icon: "fa-solid fa-user",
     },
   ];
@@ -53,7 +58,16 @@ const Layout = ({ children }) => {
         <div className="layout">
           <div className="sidebar">
             <div className="logo">
-              <h6>DOC-HELP</h6>
+              <h6 className="text">DOC-HELP</h6>
+              <div className="user-role">
+          {user?.isDoctor ? (
+            <GiPlagueDoctorProfile className="user-icon" />
+          ) : user?.isAdmin ? (
+            <MdOutlineAdminPanelSettings className="user-icon" />
+          ) : (
+            <FaRegUser className="user-icon" />
+          )}
+        </div>
               <hr />
             </div>
             <div className="menu">
@@ -61,14 +75,14 @@ const Layout = ({ children }) => {
                 const isActive = location.pathname === menu.path;
                 return (
                   <>
-                    <div className={`menu-item ${isActive && "active"}`}>
+                    <div className={`menuitem ${isActive && "active"}`}>
                       <i className={menu.icon}></i>
                       <Link to={menu.path}>{menu.name}</Link>
                     </div>
                   </>
                 );
               })}
-              <div className={`menu-item`} onClick={logouthandler}>
+              <div className={`menuitem`} onClick={logouthandler}>
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 <Link to="/login">Logout</Link>
                 {/* <p>logout</p> */}
@@ -78,7 +92,7 @@ const Layout = ({ children }) => {
           {/* child element ke andar nahi dekk rha hai  */}
           <div className="content">
             <div className="header">
-              <div className="header_content" style={{ cursor: "pointer" }}>
+              <div className="headercontent" style={{ cursor: "pointer" }}>
                 <Badge
                   count={user && user.notificaton.length}
                   onClick={() => navigate("/notification")}

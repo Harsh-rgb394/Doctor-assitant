@@ -4,6 +4,7 @@ import "../styles/doctor.css"
 
 const Doctorlist = ({doctor}) => {
     const navigate=useNavigate();
+    // console.log(doctor)
   return (
    <>
    <div className='card '
@@ -19,15 +20,15 @@ const Doctorlist = ({doctor}) => {
             <b>Experience - </b>{doctor.experience}
         </p>
         <p>
-            <b> Feesperconsulation - </b>{doctor. feesperconsulation}
+            <b> Feesperconsulation - </b>{doctor.feesperconsulation}
         </p>
         <p>
             <b> Status - </b>{doctor.status}
         </p>
-{/* 
+
         <p>
-            <b>  Timings</b>{doctor.timings[0]}-{doctor.timings[1]}
-        </p> */}
+            <b>  Timings - </b>{doctor.timings[0]}-{doctor.timings[1]}
+        </p> 
 
     </div>
    </div>

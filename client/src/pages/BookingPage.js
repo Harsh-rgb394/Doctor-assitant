@@ -17,11 +17,15 @@ const BookingPage = () => {
     const {user}=useSelector((state)=>state.user)
     const params=useParams();
     const [doctors,setDoctors]=useState([]);
+    // console.log(doctors);
     const [date,setDate]=useState();
     const [time,setTime]=useState();
     const [available,setAvailable]=useState(false);
     const dispatch=useDispatch();
     const navigate=useNavigate();
+
+
+    // console.log(user._id);
     
 
     
@@ -33,7 +37,7 @@ const BookingPage = () => {
     const userdata=async()=>{
       // cleint se token genertate kar diya and ha/getlistdoctorsi usse backend or server saide bheja ahia 
       try {
-        const res=await axios.post("/api/v1/doctor/bookingavailable",{
+        const res=await axios.post("http://localhost:5000/api/v1/doctor/getdoctorinfo",{
             doctorId:params.doctorId
         },{
           headers:{
@@ -56,7 +60,7 @@ const BookingPage = () => {
   const checkavalable=async()=>{
     try {
       dispatch(showLoading());
-      const res=await axios.post("/api/v1/user/appointment-available",{
+      const res=await axios.post("http://localhost:5000/api/v1/user/appointment-available",{
         doctorId:params.doctorId,
         date:date,
         time:time
@@ -96,7 +100,7 @@ const BookingPage = () => {
        
         dispatch(showLoading());
         const response = await axios.post(
-          "/api/v1/user/book-appointment",
+          "http://localhost:5000/api/v1/user/book-appointment",
           {
             doctorId: params.doctorId,
             userId: user._id,
@@ -158,47 +162,52 @@ const BookingPage = () => {
     },[])
   return (
     <Layout>
-        <h3>BookingPage</h3>
-        <div className='container'>
-        {
-            doctors &&(
-               <div>
-                   <h4 className='lefto'>Dr.{doctors.firstname} {doctors.lastname}</h4>
-                   <h4 className='lefto'>fees: {doctors.feesperconsulation}</h4>
-                   {/* <h4 className='lefto'>timings:{doctors.timings[0]} - {doctors.timings[1]}</h4> */}
-                   <div className='d-flex flex-column w-50'>
-                    <DatePicker format="DD-MM-YYYY"className="m-2" onChange={(value)=>{setDate(moment(value).format("DD-MM-YYYY"));
-                    setAvailable(false)}}/>
-                    <TimePicker format="HH:mm" className="m-2"onChange={(value)=>{
-                       setAvailable(false)
-                       setTime(moment(value).format("HH:mm"));
-                      }
-                    
-                    
-                    }/>
 
-                    {!available && (<button className='btn btn-primary mt-2' onClick={checkavalable} >
-                        Check Availablity
-                    </button>)}
-                    {!available && (<button className='btn btn-dark mt-2' onClick={handlebooking}>
-                        Book Now
-                    </button>)}
+<div className='booking-container'>
+            {doctors && (
+                <div className='doctor-details'>
+                    <h2 className='doctor-name'>Dr. {doctors.firstname} {doctors.lastname}</h2>
+                    <h4 className='doctor-info'>Fees: ₹{doctors.feesperconsulation}</h4>
+                    {doctors.timings && (
 
-                   </div>
+                        <h4 className='doctor-info'>Timings: {doctors.timings[0]} - {doctors.timings[1]}</h4>
 
+                    )}
+                    {/* <h4 className='doctor-info'>Timings: {doctors.timings[0]} - {doctors.timings[1]}</h4> */}
 
+                    <div className='booking-form'>
+                        <DatePicker
+                            format="DD-MM-YYYY"
+                            className="booking-input"
+                            onChange={(value) => {
+                                setDate(moment(value).format("DD-MM-YYYY"));
+                                setAvailable(false);
+                            }}
+                        />
+                        <TimePicker
+                            format="HH:mm"
+                            className="booking-input"
+                            onChange={(value) => {
+                                setAvailable(false);
+                                setTime(moment(value.toISOString()).format("HH:mm"));
+                            }}
+                        />
 
-              
-               </div>
-               
-             
-
-               
-            
-            )
-        }
-            
-          </div></Layout>
+                        {!available && (
+                            <button className='btn check-btn' onClick={checkavalable}>
+                                Check Availability
+                            </button>
+                        )}
+                        {!available && (
+                            <button className='btn book-btn' onClick={handlebooking}>
+                                Book Now
+                            </button>
+                        )}
+                    </div>
+                </div>
+            )}
+        </div>
+      </Layout>
   )
 }
 

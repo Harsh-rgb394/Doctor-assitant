@@ -4,7 +4,9 @@ const Doctormodel=require("./../models/Doctormodel");
 
 const getdoctorinfocontroller=async(req,res)=>{
     try {
-        const doctor=await Doctormodel.findOne({userId:req.body.userId});
+      console.log(req.body);
+        const doctor=await Doctormodel.findById({_id:req.body.doctorId});
+
         res.status(200).send({
             success:true,
             message:"successfully data fectches",
@@ -23,15 +25,17 @@ const getdoctorinfocontroller=async(req,res)=>{
 
 
 const showupdatecontroller=async(req,res)=>{
-
+     console.log(req.body);
     try {
-        const doctorupdate=await Doctormodel.findOneAndUpdate({userId:req.body.userId},req.body);
+        const doctorupdate=await Doctormodel.findByIdAndUpdate({_id:req.body._id},req.body,{new:true});
         // updating hai pure fields or attrinubtes mein allwo hia 
+        if(doctorupdate){
         res.status(200).send({
             success:true,
             message:"successfully get or update the profile",
             data:doctorupdate
         })
+      }
         
     } catch (error) {
         console.log(error);
@@ -46,7 +50,7 @@ const showupdatecontroller=async(req,res)=>{
 
 const bookingavailablecontroller=async(req,res)=>{
     try {
-        const bookinfo=await Doctormodel.findOne({_id:req.body.doctorId})
+        const bookinfo=await Doctormodel.findOne({userId:req.body.userId});
         res.status(200).send({
             success:true,
             message:"successfully book doctor",
@@ -91,7 +95,7 @@ const getdoctorappointapproval=async(req,res)=>{
     // }
     try {
         const doctor = await Doctormodel.findOne({ userId: req.body.userId });
-        const appointments = await appointmentModel.find({ doctorId: doctor._id });
+        const appointments = await appointmentModel.find({ doctorId: doctor._id }).populate('doctorId', '_id firstname lastname specialization phone email feesperconsulation');
         res.status(200).send({
           message: "Appointments fetched successfully",
           success: true,

@@ -1,10 +1,9 @@
 import React from "react";
 import { Form, message } from "antd";
-import "../styles/RegisterStyle.css";
+import styles from "../styles/RegisterStyle.module.css";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-
 import axios from "axios";
 
 // for newtork call
@@ -20,7 +19,7 @@ const Register = () => {
     // console.log(values);
     try {
       dispatch(showLoading());
-      const res = await axios.post("/api/v1/user/register", values);
+      const res = await axios.post("http://localhost:5000/api/v1/user/register", values);
       dispatch(hideLoading());
       // ifvalues scueedfuly gaye hai ya nahii so
       if (res.data.success) {
@@ -38,28 +37,28 @@ const Register = () => {
   };
   return (
     <>
-      <div className="form-container">
+      <div className={styles.formcontainer}>
         <Form
           layout="vertical"
           onFinish={onfinishHandler}
-          className="register_form"
+          className={styles.registerform}
         >
-          <h3 className="heading">Register Please</h3>
+          <h3 className={styles.heading}>Register Please</h3>
           {/* label jo dekhte ahi and name jo backend mein save hai  */}
-          <Form.Item label="Name" name="name" className="items">
-            <input type="text" required className="content" />
+          <Form.Item label="Name" name="name" >
+            <input type="text" required className={styles.content} />
           </Form.Item>
-          <Form.Item label="Email" name="email" className="items">
-            <input type="email" required className="content" />
+          <Form.Item label="Email" name="email" >
+            <input type="email" required className={styles.content} />
           </Form.Item>
-          <Form.Item label="Password" name="password" className="items">
-            <input type="password" required className="content" />
+          <Form.Item label="Password" name="password" >
+            <input type="password" required className={styles.content} />
           </Form.Item>
-          <Link to="/login" className="direct">
+          <Link to="/login" className={styles.direct}>
             Already register{" "}
           </Link>
 
-          <button className="btn btn-primary" type="submit">
+          <button className={styles.btn} type="submit">
             {" "}
             Register it
           </button>

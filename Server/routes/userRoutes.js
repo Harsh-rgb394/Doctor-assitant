@@ -35,7 +35,7 @@ router.post("/book-appointment",authMiddleware,bookappointmentcontroller);
 router.post("/appointment-available",authMiddleware,bookappointavailablecontroller);
 
 // router for get all appintmetns list 
-router.get("/get-all-book-appointment",authMiddleware,getallappointmentcontroller);
+router.post("/get-all-book-appointment",authMiddleware,getallappointmentcontroller);
 
 
 module.exports=router;

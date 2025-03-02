@@ -1,0 +1,89 @@
+.notifications-container {
+    /* max-width: 600px;
+    margin: auto; */
+    padding: 20px;
+    /* background: #f9f9f9; */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notifications-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.notifications-tabs {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+
+
+}
+
+.tab-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 10px;
+}
+
+.mark-read-btn,
+.delete-read-btn {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.mark-read-btn:hover,
+.delete-read-btn:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.notification-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.notification-card:hover {
+    background: #f1f1f1;
+}
+
+.notification-card.read {
+    opacity: 0.7;
+}
+
+.notification-text {
+    font-size: 19px;
+    font-weight: 500;
+    color: #333;
+}
+
+.empty-message {
+    text-align: center;
+    font-size: 20px;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .notifications-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .notification-card {
+        padding: 10px;
+    }
+}

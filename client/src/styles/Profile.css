@@ -1,0 +1,135 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.profile-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.profile-header h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.profile-section {
+    margin-bottom: 20px;
+}
+
+.profile-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.profile-row .label {
+    font-weight: bold;
+    color: #444;
+    flex-basis: 40%;
+}
+
+.profile-row .value,
+.profile-row input {
+    flex-basis: 55%;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.profile-row input {
+    cursor: text;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    text-transform: capitalize;
+    color: white;
+}
+
+.status-badge.approved {
+    background-color: #28a745;
+}
+
+.status-badge.pending {
+    background-color: #ffc107;
+}
+
+.status-badge.rejected {
+    background-color: #dc3545;
+}
+
+.timings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.timing-slot {
+    padding: 8px;
+    background-color: #e7f3ff;
+    border: 1px solid #bcdff5;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.save-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.save-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.save-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        width: 100%;
+    }
+
+    /* .profile-row {
+        flex-direction: column;
+        align-items: flex-start;
+    } */
+
+    .profile-row .label {
+        margin-bottom: 5px;
+    }
+}

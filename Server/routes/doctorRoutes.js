@@ -15,7 +15,7 @@ router.post("/showupdateproifle",authMiddleware,showupdatecontroller);4
 // and book them wiht fees time avilabe ly 
 router.post("/bookingavailable",authMiddleware,bookingavailablecontroller);
 
-router.get("/getdoctorapproval",authMiddleware,getdoctorappointapproval);
+router.post("/getdoctorapproval",authMiddleware,getdoctorappointapproval);
 // gettig aprrovala and all appoitments 
 
 
